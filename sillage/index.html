@@ -133,12 +133,15 @@ body{
 }
 
 /* ── GRID ── */
-main{padding:0 12px 80px}
+main{padding:0 12px 80px;max-width:1400px;margin:0 auto}
 #grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,1fr);
   gap:10px;
 }
+@media(min-width:600px){#grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){#grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1200px){#grid{grid-template-columns:repeat(5,1fr)}}
 
 /* ── CARD ── */
 .card{
@@ -156,6 +159,7 @@ main{padding:0 12px 80px}
 .card-img{
   background:var(--gray);
   aspect-ratio:1;
+  max-height:200px;
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -384,8 +388,8 @@ main{padding:0 12px 80px}
   <div class="modal modal-wrap">
     <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
     <div class="modal-handle"></div>
-    <div id="m-img" style="width:100%;height:180px;background:#f4f3ef;border-radius:12px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-      <img id="m-img-tag" src="" alt="" style="max-height:160px;max-width:100%;object-fit:contain;padding:10px;">
+    <div id="m-img" style="width:100%;height:260px;background:#f4f3ef;border-radius:12px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <img id="m-img-tag" src="" alt="" style="height:240px;max-width:90%;object-fit:contain;">
     </div>
     <div class="modal-marca" id="m-marca"></div>
     <div class="modal-nombre" id="m-nombre"></div>
