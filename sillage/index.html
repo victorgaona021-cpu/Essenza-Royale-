@@ -180,6 +180,14 @@ main{padding:0 12px 80px;max-width:1400px;margin:0 auto}
   font-size:8px;letter-spacing:0.15em;
   color:rgba(0,0,0,0.2);text-transform:uppercase;
 }
+.card-img img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:8px;
+  z-index:1;
+  background:var(--gray);
+}
 
 .card-body{padding:8px 10px 10px;min-height:0}
 .card-marca{
@@ -310,10 +318,19 @@ main{padding:0 12px 80px;max-width:1400px;margin:0 auto}
   width:120px;height:100px;
   background:var(--gray);
   display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
 }
 .feat-initials{
   font-family:'Bebas Neue',sans-serif;
   font-size:24px;color:rgba(0,0,0,0.15);
+}
+.feat-img img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:6px;
+  z-index:1;
+  background:var(--gray);
 }
 .feat-body{padding:8px 8px 10px}
 .feat-marca{font-size:8px;letter-spacing:0.12em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:2px}
@@ -450,6 +467,7 @@ function render(){
           <div class="card-img-initials">${initials(p.marca)}</div>
           <div class="card-img-sub">${p.concentracion||'SET'}</div>
         </div>
+        ${p.foto?`<img src="fotos/${p.foto}.jpg" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'">`:''}
       </div>
       <div class="card-body">
         <div class="card-marca">${p.marca}</div>
@@ -471,7 +489,10 @@ function renderFeatured(){
     const p=DATA[i];
     const init=initials(p.marca);
     return `<div class="feat-card" onclick="openModal(${i})">
-      <div class="feat-img"><div class="feat-initials">${init}</div></div>
+      <div class="feat-img">
+        <div class="feat-initials">${init}</div>
+        ${p.foto?`<img src="fotos/${p.foto}.jpg" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'">`:''}
+      </div>
       <div class="feat-body">
         <div class="feat-marca">${p.marca}</div>
         <div class="feat-nombre">${cleanName(p.nombre)}</div>
