@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Sillage — Fragancias Masculinas</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0A0A0A;
+  --white:#FAFAFA;
+  --gray:#F2F2F0;
+  --border:#E8E8E6;
+  --text:#111;
+  --muted:#888;
+  --gold:#B8962E;
+  --tag-fresh-bg:#EBF4FB;--tag-fresh:#1A6FA8;
+  --tag-citrus-bg:#FFF3E0;--tag-citrus:#C45000;
+  --tag-sweet-bg:#FDF0F8;--tag-sweet:#9B1D6A;
+  --tag-wood-bg:#F0EDE6;--tag-wood:#5C4A1E;
+  --tag-frutal-bg:#F0FAF0;--tag-frutal:#1A7A3A;
+  --tag-floral-bg:#FDF4FF;--tag-floral:#7A1A9A;
+  --tag-spice-bg:#FFF8EC;--tag-spice:#8A4A00;
+  --tag-arab-bg:#FFFAEC;--tag-arab:#8A7000;
+  --tag-lujo-bg:#F8F0FF;--tag-lujo:#5A1A8A;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+body{
+  background:var(--white);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  min-height:100vh;
+  overscroll-behavior:none;
+}
+
+/* ── HERO ── */
+.hero{
+  background:var(--black);
+  color:#fff;
+  padding:36px 20px 30px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,0.025) 0px,rgba(255,255,255,0.025) 1px,transparent 1px,transparent 60px),
+             repeating-linear-gradient(0deg,rgba(255,255,255,0.025) 0px,rgba(255,255,255,0.025) 1px,transparent 1px,transparent 60px);
+}
+.hero-inner{position:relative;z-index:1}
+.hero-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:52px;
+  letter-spacing:0.12em;
+  line-height:1;
+  margin-bottom:4px;
+}
+.hero-logo span{color:var(--gold)}
+.hero-tagline{
+  font-size:11px;letter-spacing:0.22em;
+  color:rgba(255,255,255,0.45);
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.hero-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.hero-pill{
+  font-size:11px;padding:5px 12px;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:20px;color:rgba(255,255,255,0.6);
+}
+.hero-pill strong{color:#fff;font-weight:500}
+
+/* ── STICKY NAV ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,250,250,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.search-row{padding:10px 14px 0}
+.search-box{
+  position:relative;
+}
+.search-box input{
+  width:100%;
+  padding:11px 14px 11px 40px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  background:var(--gray);
+  font-family:'Outfit',sans-serif;
+  font-size:15px;
+  color:var(--text);
+  outline:none;
+  transition:border-color .2s;
+}
+.search-box input::placeholder{color:var(--muted)}
+.search-box input:focus{border-color:var(--black);background:#fff}
+.search-box svg{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2;
+  stroke-linecap:round;pointer-events:none;
+}
+
+.filters{
+  display:flex;gap:6px;overflow-x:auto;
+  padding:10px 14px 10px;scrollbar-width:none;
+}
+.filters::-webkit-scrollbar{display:none}
+.chip{
+  flex-shrink:0;padding:7px 14px;
+  border-radius:8px;border:1.5px solid var(--border);
+  background:#fff;color:#333;
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.chip.active{background:var(--black);border-color:var(--black);color:#fff;font-weight:700}
+.chip:active{transform:scale(0.96)}
+
+/* ── STATS ── */
+.stats{
+  padding:8px 16px 12px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.stats-left{font-size:12px;color:var(--muted)}
+.stats-left strong{color:var(--text);font-weight:600}
+.stats-sort{
+  font-size:11px;color:var(--muted);
+  background:none;border:1px solid var(--border);
+  padding:4px 10px;border-radius:6px;
+  font-family:'Outfit',sans-serif;cursor:pointer;
+}
+
+/* ── GRID ── */
+main{padding:0 12px 80px;max-width:1400px;margin:0 auto}
+#grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+@media(min-width:600px){#grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){#grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1200px){#grid{grid-template-columns:repeat(5,1fr)}}
+
+/* ── CARD ── */
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  transition:transform .15s;
+}
+.card:active{transform:scale(0.97)}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.card-img{
+  background:var(--gray);
+  width:100%;
+  height:150px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+.card-img-placeholder{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+}
+.card-img-initials{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  color:rgba(0,0,0,0.12);
+  letter-spacing:0.05em;
+}
+.card-img-sub{
+  font-size:8px;letter-spacing:0.15em;
+  color:rgba(0,0,0,0.2);text-transform:uppercase;
+}
+.card-img img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:8px;
+  z-index:1;
+  background:var(--gray);
+}
+
+.card-body{padding:8px 10px 10px;min-height:0}
+.card-marca{
+  font-size:9px;letter-spacing:0.10em;
+  color:#333;font-weight:700;
+  text-transform:uppercase;margin-bottom:3px;
+}
+.card-nombre{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:14px;letter-spacing:0.04em;
+  color:var(--text);line-height:1.15;
+  margin-bottom:4px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.tag{
+  font-size:11px;padding:4px 9px;border-radius:6px;font-weight:500;
+  white-space:nowrap;
+}
+.tag-fresco{background:var(--tag-fresh-bg);color:var(--tag-fresh)}
+.tag-citrico{background:var(--tag-citrus-bg);color:var(--tag-citrus)}
+.tag-dulce{background:var(--tag-sweet-bg);color:var(--tag-sweet)}
+.tag-amaderado{background:var(--tag-wood-bg);color:var(--tag-wood)}
+.tag-frutal{background:var(--tag-frutal-bg);color:var(--tag-frutal)}
+.tag-floral{background:var(--tag-floral-bg);color:var(--tag-floral)}
+.tag-especiado{background:var(--tag-spice-bg);color:var(--tag-spice)}
+.tag-arabe{background:var(--tag-arab-bg);color:var(--tag-arab)}
+.tag-lujo{background:var(--tag-lujo-bg);color:var(--tag-lujo)}
+
+.card-footer{display:flex;align-items:flex-end;justify-content:space-between}
+.card-price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:0.04em;
+  color:var(--text);line-height:1;
+}
+.card-price-sub{font-size:9px;color:var(--muted);margin-top:1px}
+.card-ml{
+  font-size:10px;color:var(--muted);
+  background:var(--gray);
+  padding:3px 7px;border-radius:6px;
+  font-weight:500;
+}
+
+/* ── EMPTY ── */
+.empty{
+  grid-column:1/-1;
+  text-align:center;padding:60px 20px;
+  color:var(--muted);
+}
+.empty-icon{font-size:36px;margin-bottom:10px}
+.empty p{font-size:14px}
+
+/* ── WA FLOAT ── */
+.wa-btn{
+  position:fixed;bottom:72px;right:14px;z-index:200;
+  background:#25D366;color:#fff;
+  border:none;border-radius:50px;
+  padding:13px 18px;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;display:flex;align-items:center;gap:7px;
+  box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  text-decoration:none;letter-spacing:0.01em;
+}
+.wa-btn svg{width:18px;height:18px;fill:white;flex-shrink:0}
+
+/* MODAL */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:#fff;border-radius:20px 20px 0 0;
+  width:100%;max-width:480px;padding:24px 20px 40px;
+  animation:slideUp .2s ease;
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px}
+.modal-marca{font-size:10px;letter-spacing:0.16em;color:var(--gold);font-weight:600;text-transform:uppercase;margin-bottom:4px}
+.modal-nombre{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.06em;margin-bottom:4px}
+.modal-version{font-size:13px;color:var(--muted);margin-bottom:12px}
+.modal-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.modal-price{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:0.04em;margin-bottom:4px}
+.modal-price-note{font-size:12px;color:var(--muted);margin-bottom:20px}
+.modal-wa{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:#25D366;color:#fff;
+  border:none;border-radius:12px;padding:15px;width:100%;
+  font-family:'Outfit',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;text-decoration:none;
+}
+.modal-wa svg{width:20px;height:20px;fill:white}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--gray);border:none;border-radius:50%;
+  width:32px;height:32px;cursor:pointer;font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-wrap{position:relative}
+
+.featured-section{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  padding:14px 0 16px;
+}
+.featured-header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 16px;margin-bottom:12px;
+}
+.featured-title{font-size:14px;font-weight:700;color:var(--text)}
+.featured-sub{font-size:11px;color:var(--muted)}
+.featured-scroll{
+  display:flex;gap:10px;
+  overflow-x:auto;padding:0 16px;
+  scrollbar-width:none;
+}
+.featured-scroll::-webkit-scrollbar{display:none}
+.feat-card{
+  flex-shrink:0;width:120px;
+  background:var(--gray);
+  border-radius:12px;overflow:hidden;
+  cursor:pointer;border:1px solid var(--border);
+  transition:transform .15s;
+}
+.feat-card:active{transform:scale(0.96)}
+.feat-img{
+  width:120px;height:100px;
+  background:var(--gray);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.feat-initials{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;color:rgba(0,0,0,0.15);
+}
+.feat-img img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:contain;
+  padding:6px;
+  z-index:1;
+  background:var(--gray);
+}
+.feat-body{padding:8px 8px 10px}
+.feat-marca{font-size:8px;letter-spacing:0.12em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:2px}
+.feat-nombre{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;color:var(--text);line-height:1.2;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  margin-bottom:4px;
+}
+.feat-price{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--text)}
+
+
+/* ── ACORDES ── */
+.modal-acordes{margin:14px 0 10px}
+.modal-acordes-title{font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;font-weight:600}
+.acorde-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.acorde-label{font-size:11px;color:#444;font-weight:500;width:90px;text-align:right;flex-shrink:0}
+.acorde-bar-wrap{flex:1;height:20px;background:#f0f0ee;border-radius:4px;overflow:hidden}
+.acorde-bar{height:100%;border-radius:4px;transition:width 0.6s ease;display:flex;align-items:center;padding-left:6px}
+.acorde-bar span{font-size:9px;color:rgba(255,255,255,0.85);font-weight:600;white-space:nowrap}
+
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo">SIL<span>·</span>LAGE</div>
+    <div class="hero-tagline">Fragancias Masculinas · León, Gto.</div>
+    <div class="hero-pills">
+      <div class="hero-pill"><strong>297</strong> perfumes</div>
+      <div class="hero-pill"><strong>100%</strong> originales</div>
+      <div class="hero-pill">Entrega a <strong>domicilio</strong></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="featured-section">
+  <div class="featured-header">
+    <div class="featured-title">🔥 Los más pedidos</div>
+    <div class="featured-sub">Los que más se venden</div>
+  </div>
+  <div class="featured-scroll" id="featured-scroll"></div>
+</div>
+
+<div class="nav">
+  <div class="search-row">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search" type="text" placeholder="Busca marca, perfume o aroma...">
+    </div>
+  </div>
+  <div class="filters">
+    <button class="chip active" data-f="all">Todo</button>
+    <button class="chip" data-f="diario">☀ Diario</button>
+    <button class="chip" data-f="verano">◈ Verano</button>
+    <button class="chip" data-f="arabe">Árabe</button>
+    <button class="chip" data-f="lujo">Lujo</button>
+    <button class="chip" data-f="lt1000">Menos $1,000</button>
+    <button class="chip" data-f="1k2k">$1,000–$2,000</button>
+    <button class="chip" data-f="gt2000">+$2,000</button>
+    <button class="chip" data-f="noche">🌙 Noche</button>
+    <button class="chip" data-f="invierno">❄ Invierno</button>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stats-left">Mostrando <strong id="cnt">178</strong> fragancias</div>
+</div>
+
+<main>
+  <div id="grid"></div>
+  <div id="empty" class="empty" style="display:none"><div class="empty-icon">🔍</div><p>Sin resultados.<br>Prueba otro término.</p></div>
+</main>
+
+<a class="wa-btn" href="https://wa.me/524777224550?text=Hola,%20vi%20el%20cat%C3%A1logo%20de%20Sillage%20y%20me%20interesa%20un%20perfume" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Pedir info
+</a>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal modal-wrap">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div class="modal-handle"></div>
+    <div id="m-img" style="width:100%;height:260px;background:#f4f3ef;border-radius:12px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <img id="m-img-tag" src="" alt="" style="height:240px;max-width:90%;object-fit:contain;">
+    </div>
+    <div class="modal-marca" id="m-marca"></div>
+    <div class="modal-nombre" id="m-nombre"></div>
+    <div class="modal-version" id="m-version"></div>
+    <div class="modal-tags" id="m-tags"></div>
+    <div id="m-acordes"></div>
+    <div class="modal-price" id="m-price"></div>
+    <div class="modal-price-note">Precio final MXN · Entrega en León, Gto.</div>
+    <a class="modal-wa" id="m-wa" href="#" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir por WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+const DATA=[{"marca": "ABERCROMBIE & FITCH", "nombre": "ABERCROMBIE & FITCH FIERCE 100 ML EDC DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1000, "ml": "100ML", "concentracion": "EDC", "foto": "abercrombie_fitch_fierce"}, {"marca": "ACQUA DI PARMA", "nombre": "ACQUA DI PARMA BLUE MEDITERRANEO MANDORLO DI SICILIA EDT DE 100 ML", "tipo": "Lujo", "aroma": "Dulce", "ocasion": "Verano", "precio": 2200, "ml": "100ML", "concentracion": "EDT", "foto": "acqua_di_parma_blue_mediterraneo_mandorl"}, {"marca": "ADIDAS", "nombre": "ADIDAS VARIOS EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 250, "ml": "100ML", "concentracion": "EDT", "foto": "adidas_varios"}, {"marca": "ADOLFO DOMINGUEZ", "nombre": "ADOLFO DOMINGUEZ NEROLI EDT DE 120 ML", "tipo": "Diseñador", "aroma": "Floral", "ocasion": "Diario", "precio": 1100, "ml": "120ML", "concentracion": "EDT", "foto": "adolfo_dominguez_neroli"}, {"marca": "ADOLFO DOMINGUEZ", "nombre": "AGUA FRESCA CITRUS CEDRO EDT DE 120 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1100, "ml": "120ML", "concentracion": "EDT", "foto": "agua_fresca_citrus_cedro"}, {"marca": "ADOLFO DOMINGUEZ", "nombre": "AGUA FRESCA LIMA TONKA EDT DE 120 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Diario", "precio": 1000, "ml": "120ML", "concentracion": "EDT", "foto": "agua_fresca_lima_tonka"}, {"marca": "ADOLFO DOMINGUEZ", "nombre": "BAMBU MAN RADIANT EDT DE 120 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 750, "ml": "120ML", "concentracion": "EDT", "foto": "bambu_man_radiant"}, {"marca": "ADOLFO DOMINGUEZ", "nombre": "EBANO SALVIA EDP DE 120 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 950, "ml": "120ML", "concentracion": "EDP", "foto": "ebano_salvia"}, {"marca": "ANIMALE", "nombre": "ANIMALE ANIMALE 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "animale_animale"}, {"marca": "ANIMALE", "nombre": "ANIMALE TRAD 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "100ML", "concentracion": "EDT", "foto": "animale_trad"}, {"marca": "ANTONIO BANDERAS", "nombre": "THE ICON ELIXIR EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 700, "ml": "100ML", "concentracion": "EDP", "foto": "the_icon_elixir"}, {"marca": "AZZARO", "nombre": "AZZARO 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 850, "ml": "100ML", "concentracion": "EDT", "foto": "azzaro"}, {"marca": "AZZARO", "nombre": "AZZARO 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1150, "ml": "200ML", "concentracion": "EDT", "foto": "azzaro"}, {"marca": "AZZARO", "nombre": "AZZARO CHROME 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 950, "ml": "100ML", "concentracion": "EDT", "foto": "azzaro_chrome"}, {"marca": "AZZARO", "nombre": "AZZARO CHROME 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1250, "ml": "200ML", "concentracion": "EDT", "foto": "azzaro_chrome"}, {"marca": "AZZARO", "nombre": "AZZARO CHROME EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1300, "ml": "100ML", "concentracion": "EDP", "foto": "azzaro_chrome"}, {"marca": "AZZARO", "nombre": "AZZARO CHROME PARFUM EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1300, "ml": "100ML", "concentracion": "PARFUM", "foto": "azzaro_chrome"}, {"marca": "AZZARO", "nombre": "AZZARO SPORT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 750, "ml": "100ML", "concentracion": "EDT", "foto": "azzaro_sport"}, {"marca": "AZZARO", "nombre": "AZZARO THE MOST WANTED EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1500, "ml": "100ML", "concentracion": "EDP", "foto": "azzaro_the_most_wanted"}, {"marca": "AZZARO", "nombre": "AZZARO THE MOST WANTED EDT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 1350, "ml": "100ML", "concentracion": "EDT", "foto": "azzaro_the_most_wanted"}, {"marca": "AZZARO", "nombre": "AZZARO WANTED BY NIGHT 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1200, "ml": "100ML", "concentracion": "EDP", "foto": "azzaro_wanted_by_night"}, {"marca": "AZZARO", "nombre": "AZZARO WANTED EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1100, "ml": "100ML", "concentracion": "EDT", "foto": "azzaro_wanted"}, {"marca": "BENETTON", "nombre": "BENETTON CACTUS MAN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 600, "ml": "100ML", "concentracion": "EDT", "foto": "benetton_cactus_man"}, {"marca": "BENETTON", "nombre": "BENETTON ON THE GO 30ML EDT DE 30 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 150, "ml": "30ML", "concentracion": "EDT", "foto": "benetton_on_the_go"}, {"marca": "BENETTON", "nombre": "COLORS FREE FOR HIM EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 750, "ml": "100ML", "concentracion": "EDT", "foto": "colors_free_for_him"}, {"marca": "BENETTON", "nombre": "FOREVER GREEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 600, "ml": "100ML", "concentracion": "EDT", "foto": "forever_green"}, {"marca": "BENETTON", "nombre": "GREEN POP FOR HIM EDT DE 80 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 750, "ml": "80ML", "concentracion": "EDT", "foto": "green_pop_for_him"}, {"marca": "BENETTON", "nombre": "INFERNO PARADISO BLUE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 500, "ml": "100ML", "concentracion": "EDT", "foto": "inferno_paradiso_blue"}, {"marca": "BENETTON", "nombre": "WE ARE TRIBE COOL EDT DE 90 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "90ML", "concentracion": "EDT", "foto": "we_are_tribe_cool"}, {"marca": "BENETTON", "nombre": "WE ARE TRIBE EDT DE 90 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 900, "ml": "90ML", "concentracion": "EDT", "foto": "we_are_tribe"}, {"marca": "BENETTON", "nombre": "WE ARE TRIBE INTENSE EDP DE 90 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 900, "ml": "90ML", "concentracion": "EDP", "foto": "we_are_tribe_intense"}, {"marca": "BURBERRY", "nombre": "BURBERRY BRIT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1150, "ml": "100ML", "concentracion": "EDT", "foto": "burberry_brit"}, {"marca": "BURBERRY", "nombre": "BURBERRY HERO EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 2500, "ml": "100ML", "concentracion": "EDP", "foto": "burberry_hero"}, {"marca": "BURBERRY", "nombre": "BURBERRY LONDON EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1150, "ml": "100ML", "concentracion": "EDT", "foto": "burberry_london"}, {"marca": "CALVIN KLEIN", "nombre": "CK BE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "200ML", "concentracion": "EDT", "foto": "ck_be"}, {"marca": "CALVIN KLEIN", "nombre": "CK ONE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1050, "ml": "200ML", "concentracion": "EDT", "foto": "ck_one"}, {"marca": "CALVIN KLEIN", "nombre": "CK ONE REFLECTIONS EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "ck_one_reflections"}, {"marca": "CALVIN KLEIN", "nombre": "CK ONE SHOCK 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 950, "ml": "200ML", "concentracion": "EDT", "foto": "ck_one_shock"}, {"marca": "CALVIN KLEIN", "nombre": "ESCAPE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "escape"}, {"marca": "CALVIN KLEIN", "nombre": "ETERNITY 100 ML EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 1200, "ml": "100ML", "concentracion": "EDP", "foto": "eternity"}, {"marca": "CALVIN KLEIN", "nombre": "ETERNITY 100 ML EDT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1100, "ml": "100ML", "concentracion": "EDT", "foto": "eternity"}, {"marca": "CALVIN KLEIN", "nombre": "ETERNITY 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1500, "ml": "200ML", "concentracion": "EDT", "foto": "eternity"}, {"marca": "CALVIN KLEIN", "nombre": "ETERNITY AQUA EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1050, "ml": "100ML", "concentracion": "EDT", "foto": "eternity_aqua"}, {"marca": "CALVIN KLEIN", "nombre": "EUPHORIA MEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1000, "ml": "100ML", "concentracion": "EDT", "foto": "euphoria_men"}, {"marca": "CALVIN KLEIN", "nombre": "OBSESSION 125 ML EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 750, "ml": "125ML", "concentracion": "EDT", "foto": "obsession"}, {"marca": "CALVIN KLEIN", "nombre": "OBSESSION 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1150, "ml": "200ML", "concentracion": "EDT", "foto": "obsession"}, {"marca": "CARLO CORINTO", "nombre": "CARLO CORINTO 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "carlo_corinto"}, {"marca": "CAROLINA HERRERA", "nombre": "212 MEN 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1950, "ml": "100ML", "concentracion": "EDT", "foto": "212_men"}, {"marca": "CAROLINA HERRERA", "nombre": "212 MEN 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 2600, "ml": "200ML", "concentracion": "EDT", "foto": "212_men"}, {"marca": "CAROLINA HERRERA", "nombre": "212 MEN HEROES 150 ML EDT DE 150 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Diario", "precio": 2250, "ml": "150ML", "concentracion": "EDT", "foto": "212_men_heroes"}, {"marca": "CAROLINA HERRERA", "nombre": "212 MEN HEROES 90 ML EDT DE 90 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Diario", "precio": 1950, "ml": "90ML", "concentracion": "EDT", "foto": "212_men_heroes"}, {"marca": "CAROLINA HERRERA", "nombre": "212 SEXY MEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1850, "ml": "100ML", "concentracion": "EDT", "foto": "212_sexy_men"}, {"marca": "CAROLINA HERRERA", "nombre": "212 VIP MEN 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1950, "ml": "100ML", "concentracion": "EDT", "foto": "212_vip_men"}, {"marca": "CAROLINA HERRERA", "nombre": "212 VIP MEN 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2550, "ml": "200ML", "concentracion": "EDT", "foto": "212_vip_men"}, {"marca": "CAROLINA HERRERA", "nombre": "212 VIP MEN BLACK 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2050, "ml": "100ML", "concentracion": "EDP", "foto": "212_vip_men_black"}, {"marca": "CAROLINA HERRERA", "nombre": "212 VIP MEN BLACK 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2700, "ml": "200ML", "concentracion": "EDP", "foto": "212_vip_men_black"}, {"marca": "CAROLINA HERRERA", "nombre": "212 VIP MEN BLACK ELIXIR EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2200, "ml": "100ML", "concentracion": "EDP", "foto": "212_vip_men_black_elixir"}, {"marca": "CAROLINA HERRERA", "nombre": "BAD BOY 100 ML EDT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2050, "ml": "100ML", "concentracion": "EDT", "foto": "bad_boy"}, {"marca": "CAROLINA HERRERA", "nombre": "BAD BOY COBALT EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2150, "ml": "100ML", "concentracion": "EDP", "foto": "bad_boy_cobalt"}, {"marca": "CAROLINA HERRERA", "nombre": "BAD BOY COBALT ELIXIR EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "bad_boy_cobalt_elixir"}, {"marca": "CAROLINA HERRERA", "nombre": "BAD BOY ELIXIR EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "bad_boy_elixir"}, {"marca": "CAROLINA HERRERA", "nombre": "BAD BOY LE PARFUM EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2250, "ml": "100ML", "concentracion": "PARFUM", "foto": "bad_boy_le"}, {"marca": "CAROLINA HERRERA", "nombre": "CH MEN 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 2050, "ml": "100ML", "concentracion": "EDT", "foto": "ch_men"}, {"marca": "CAROLINA HERRERA", "nombre": "CH MEN 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 2600, "ml": "200ML", "concentracion": "EDT", "foto": "ch_men"}, {"marca": "CAROLINA HERRERA", "nombre": "CH MEN BIRDS OF PARADISE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Invierno", "precio": 2100, "ml": "100ML", "concentracion": "EDP", "foto": "ch_men_birds_of_paradise"}, {"marca": "CAROLINA HERRERA", "nombre": "CH MEN WILD LOVE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2050, "ml": "100ML", "concentracion": "EDP", "foto": "ch_men_wild_love"}, {"marca": "CARTIER", "nombre": "PASHA EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Invierno", "precio": 2050, "ml": "100ML", "concentracion": "EDT", "foto": "pasha"}, {"marca": "COACH", "nombre": "COACH MAN BLUE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1250, "ml": "100ML", "concentracion": "EDT", "foto": "coach_man_blue"}, {"marca": "COACH", "nombre": "COACH MAN EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 1500, "ml": "100ML", "concentracion": "EDP", "foto": "coach_man"}, {"marca": "COACH", "nombre": "COACH MAN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1250, "ml": "100ML", "concentracion": "EDT", "foto": "coach_man"}, {"marca": "COACH", "nombre": "COACH MAN GREEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1150, "ml": "100ML", "concentracion": "EDT", "foto": "coach_man_green"}, {"marca": "COACH", "nombre": "COACH OPEN ROAD EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1250, "ml": "100ML", "concentracion": "EDT", "foto": "coach_open_road"}, {"marca": "COACH", "nombre": "COACH PLATINUM EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1150, "ml": "100ML", "concentracion": "EDP", "foto": "coach_platinum"}, {"marca": "COTY", "nombre": "ASPEN EDC DE 118 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 400, "ml": "118ML", "concentracion": "EDC", "foto": "aspen"}, {"marca": "CREED", "nombre": "CREED SILVER MOUNTAIN WATER EDP DE 100 ML", "tipo": "Lujo", "aroma": "Fresco", "ocasion": "Verano", "precio": 7500, "ml": "100ML", "concentracion": "EDP", "foto": "creed_silver_mountain_water"}, {"marca": "CRISTIANO RONALDO", "nombre": "CR7 PLAY IT COOL EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "cr7_play_it_cool"}, {"marca": "CRISTIANO RONALDO", "nombre": "CRISTIANO RONALDO CR7 EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Diario", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "cristiano_ronaldo_cr7"}, {"marca": "CUBA PARFUMS", "nombre": "CUBA HOMBRE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 250, "ml": "100ML", "concentracion": "EDT", "foto": "cuba_hombre"}, {"marca": "DAVIDOFF", "nombre": "COOL WATER 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 950, "ml": "200ML", "concentracion": "EDT", "foto": "cool_water"}, {"marca": "DAVIDOFF", "nombre": "COOL WATER EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 750, "ml": "125ML", "concentracion": "EDT", "foto": "cool_water"}, {"marca": "DIESEL", "nombre": "DIESEL SPIRIT OF THE BRAVE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1300, "ml": "200ML", "concentracion": "EDT", "foto": "diesel_spirit_of_the_brave"}, {"marca": "DIOR", "nombre": "DIOR HOMME 2020 EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 2700, "ml": "100ML", "concentracion": "EDT", "foto": "dior_homme_2020"}, {"marca": "DIOR", "nombre": "DIOR HOMME COLOGNE 125 ML EDC DE 125 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2850, "ml": "125ML", "concentracion": "EDC", "foto": "dior_homme_cologne"}, {"marca": "DIOR", "nombre": "DIOR HOMME INTENSE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3200, "ml": "100ML", "concentracion": "EDP", "foto": "dior_homme_intense"}, {"marca": "DIOR", "nombre": "DIOR HOMME SPORT 125 ML EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2850, "ml": "125ML", "concentracion": "EDT", "foto": "dior_homme_sport"}, {"marca": "DIOR", "nombre": "DUNE POUR HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2100, "ml": "100ML", "concentracion": "EDT", "foto": "dune_pour_homme"}, {"marca": "DIOR", "nombre": "FAHRENHEIT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 2650, "ml": "100ML", "concentracion": "EDT", "foto": "fahrenheit"}, {"marca": "DIOR", "nombre": "FAHRENHEIT 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 3650, "ml": "200ML", "concentracion": "EDT", "foto": "fahrenheit"}, {"marca": "DIOR", "nombre": "SAUVAGE EAU FORTE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 3900, "ml": "100ML", "concentracion": "EDP", "foto": "sauvage_eau_forte"}, {"marca": "DIOR", "nombre": "SAUVAGE EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 3400, "ml": "100ML", "concentracion": "EDP", "foto": "sauvage"}, {"marca": "DIOR", "nombre": "SAUVAGE EDT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 2650, "ml": "100ML", "concentracion": "EDT", "foto": "sauvage"}, {"marca": "DIOR", "nombre": "SAUVAGE EDT 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 3750, "ml": "200ML", "concentracion": "EDT", "foto": "sauvage"}, {"marca": "DIOR", "nombre": "SAUVAGE ELIXIR 60ML EDP DE 60 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 3900, "ml": "60ML", "concentracion": "EDP", "foto": "sauvage_elixir"}, {"marca": "DIOR", "nombre": "SAUVAGE PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 3900, "ml": "100ML", "concentracion": "PARFUM", "foto": "sauvage"}, {"marca": "DOLCE & GABBANA", "nombre": "DEVOTION POUR HOMME EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 1850, "ml": "100ML", "concentracion": "EDP", "foto": "devotion_pour_homme"}, {"marca": "DOLCE & GABBANA", "nombre": "DOLCE K EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1750, "ml": "100ML", "concentracion": "EDP", "foto": "dolce_k"}, {"marca": "DOLCE & GABBANA", "nombre": "DOLCE K EDP INTENSE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1850, "ml": "100ML", "concentracion": "EDP", "foto": "dolce_k"}, {"marca": "DOLCE & GABBANA", "nombre": "DOLCE K EDT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1550, "ml": "100ML", "concentracion": "EDT", "foto": "dolce_k"}, {"marca": "DOLCE & GABBANA", "nombre": "DOLCE & GABBANA 125 ML EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 1450, "ml": "125ML", "concentracion": "EDT", "foto": "dolce_gabbana"}, {"marca": "DOLCE & GABBANA", "nombre": "LIGHT BLUE 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1600, "ml": "100ML", "concentracion": "EDT", "foto": "light_blue"}, {"marca": "DOLCE & GABBANA", "nombre": "LIGHT BLUE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2000, "ml": "200ML", "concentracion": "EDT", "foto": "light_blue"}, {"marca": "DOLCE & GABBANA", "nombre": "LIGHT BLUE EAU INTENSE 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1750, "ml": "100ML", "concentracion": "EDP", "foto": "light_blue_eau_intense"}, {"marca": "DOLCE & GABBANA", "nombre": "LIGHT BLUE EAU INTENSE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2050, "ml": "200ML", "concentracion": "EDT", "foto": "light_blue_eau_intense"}, {"marca": "DOLCE & GABBANA", "nombre": "THE ONE 100 ML EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1650, "ml": "100ML", "concentracion": "EDP", "foto": "the_one"}, {"marca": "DOLCE & GABBANA", "nombre": "THE ONE 150 ML EDP EDP DE 150 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2000, "ml": "150ML", "concentracion": "EDP", "foto": "the_one"}, {"marca": "DOLCE & GABBANA", "nombre": "THE ONE EDP INTENSE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1650, "ml": "100ML", "concentracion": "EDP", "foto": "the_one"}, {"marca": "DOLCE & GABBANA", "nombre": "THE ONE GOLD EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1350, "ml": "100ML", "concentracion": "EDP", "foto": "the_one_gold"}, {"marca": "FERGASSI", "nombre": "FERGASSI MAN BLACK EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 400, "ml": "100ML", "concentracion": "EDT", "foto": "fergassi_man_black"}, {"marca": "FERRIONI", "nombre": "FERRIONI NEON HEY DUDE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 650, "ml": "100ML", "concentracion": "EDT", "foto": "ferrioni_neon_hey_dude"}, {"marca": "FRAGRANCE WORLD", "nombre": "HAYAATI BEAU EDP DE 100 ML", "tipo": "Árabe", "aroma": "Dulce", "ocasion": "Diario", "precio": 700, "ml": "100ML", "concentracion": "EDP", "foto": "hayaati_beau"}, {"marca": "GIORGIO ARMANI", "nombre": "ACQUA DI GIO 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2150, "ml": "100ML", "concentracion": "EDT", "foto": "acqua_di_gio"}, {"marca": "GIORGIO ARMANI", "nombre": "ACQUA DI GIO 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2550, "ml": "200ML", "concentracion": "EDT", "foto": "acqua_di_gio"}, {"marca": "GIORGIO ARMANI", "nombre": "ACQUA DI GIO EDP 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 3200, "ml": "200ML", "concentracion": "EDP", "foto": "acqua_di_gio"}, {"marca": "GIORGIO ARMANI", "nombre": "ACQUA DI GIO PARFUM PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 2850, "ml": "100ML", "concentracion": "PARFUM", "foto": "acqua_di_gio"}, {"marca": "GIORGIO ARMANI", "nombre": "ACQUA DI GIO PROFONDO 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2650, "ml": "100ML", "concentracion": "EDP", "foto": "acqua_di_gio_profondo"}, {"marca": "GIORGIO ARMANI", "nombre": "ACQUA DI GIO PROFONDO PARFUM 100 ML PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2850, "ml": "100ML", "concentracion": "PARFUM", "foto": "acqua_di_gio_profondo"}, {"marca": "GIORGIO ARMANI", "nombre": "ARMANI CODE PARFUM DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3050, "ml": "125ML", "concentracion": "PARFUM", "foto": "armani_code"}, {"marca": "GIORGIO ARMANI", "nombre": "ARMANI EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Diario", "precio": 1600, "ml": "100ML", "concentracion": "EDT", "foto": "armani"}, {"marca": "GIORGIO ARMANI", "nombre": "STRONGER WITH YOU EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 2050, "ml": "100ML", "concentracion": "EDT", "foto": "stronger_with_you"}, {"marca": "GIORGIO ARMANI", "nombre": "STRONGER WITH YOU INTENSELY EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2350, "ml": "100ML", "concentracion": "EDP", "foto": "stronger_with_you_intensely"}, {"marca": "GIORGIO ARMANI", "nombre": "STRONGER WITH YOU PARFUM EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2350, "ml": "100ML", "concentracion": "PARFUM", "foto": "stronger_with_you"}, {"marca": "GIVENCHY", "nombre": "GENTLEMAN EDT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1250, "ml": "100ML", "concentracion": "EDT", "foto": "gentleman"}, {"marca": "GIVENCHY", "nombre": "GENTLEMEN ONLY EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 1450, "ml": "100ML", "concentracion": "EDT", "foto": "gentlemen_only"}, {"marca": "GIVENCHY", "nombre": "GIVENCHY BLUE LABEL EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1250, "ml": "100ML", "concentracion": "EDT", "foto": "givenchy_blue_label"}, {"marca": "GIVENCHY", "nombre": "INSENSE ULTRAMARINE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1050, "ml": "100ML", "concentracion": "EDT", "foto": "insense_ultramarine"}, {"marca": "GIVENCHY", "nombre": "PI DE GIVENCHY EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 1350, "ml": "100ML", "concentracion": "EDT", "foto": "pi_de_givenchy"}, {"marca": "GUCCI", "nombre": "GUCCI GUILTY EDP EDP DE 90 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 2300, "ml": "90ML", "concentracion": "EDP", "foto": "gucci_guilty"}, {"marca": "GUERLAIN", "nombre": "L'HOMME IDEAL EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 1600, "ml": "100ML", "concentracion": "EDP", "foto": "lhomme_ideal"}, {"marca": "GUERLAIN", "nombre": "L'HOMME IDEAL EDT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 1450, "ml": "100ML", "concentracion": "EDT", "foto": "lhomme_ideal"}, {"marca": "GUERLAIN", "nombre": "L'HOMME IDEAL EXTREME EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 1600, "ml": "100ML", "concentracion": "EDP", "foto": "lhomme_ideal_extreme"}, {"marca": "GUERLAIN", "nombre": "L'HOMME IDEAL PARFUM PARF DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1900, "ml": "100ML", "concentracion": "PARFUM", "foto": "lhomme_ideal"}, {"marca": "GUERLAIN", "nombre": "VETIVER 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1400, "ml": "100ML", "concentracion": "EDT", "foto": "vetiver"}, {"marca": "GUERLAIN", "nombre": "VETIVER 150 ML EDT DE 150 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1600, "ml": "150ML", "concentracion": "EDT", "foto": "vetiver"}, {"marca": "GUERLAIN", "nombre": "VETIVER PARFUM PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1950, "ml": "100ML", "concentracion": "PARFUM", "foto": "vetiver"}, {"marca": "GUESS", "nombre": "GUESS 1981 INDIGO MEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 700, "ml": "100ML", "concentracion": "EDT", "foto": "guess_1981_indigo_men"}, {"marca": "GUESS", "nombre": "GUESS 1981 MEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "guess_1981_men"}, {"marca": "GUESS", "nombre": "GUESS DARE MEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 700, "ml": "100ML", "concentracion": "EDT", "foto": "guess_dare_men"}, {"marca": "GUESS", "nombre": "GUESS MAN EDT DE 75 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 700, "ml": "75ML", "concentracion": "EDT", "foto": "guess_man"}, {"marca": "GUESS", "nombre": "GUESS MAN GOLD EDT DE 75 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 750, "ml": "75ML", "concentracion": "EDT", "foto": "guess_man_gold"}, {"marca": "GUESS", "nombre": "GUESS MARCIANO EDT DE 75 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 700, "ml": "75ML", "concentracion": "EDT", "foto": "guess_marciano"}, {"marca": "GUESS", "nombre": "GUESS UOMO ACQUA EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "guess_uomo_acqua"}, {"marca": "GUY LAROCHE", "nombre": "DRAKKAR BLEU EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 650, "ml": "100ML", "concentracion": "EDP", "foto": "drakkar_bleu"}, {"marca": "GUY LAROCHE", "nombre": "DRAKKAR INTENSE 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 700, "ml": "100ML", "concentracion": "EDP", "foto": "drakkar_intense"}, {"marca": "GUY LAROCHE", "nombre": "DRAKKAR NOIR 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 700, "ml": "100ML", "concentracion": "EDT", "foto": "drakkar_noir"}, {"marca": "HALSTON", "nombre": "HALSTON Z14 EDC DE 125 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 750, "ml": "125ML", "concentracion": "EDC", "foto": "halston_z14"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED EDT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 1500, "ml": "100ML", "concentracion": "EDT", "foto": "boss_bottled"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED EDT 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 1800, "ml": "200ML", "concentracion": "EDT", "foto": "boss_bottled"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED INFINITE 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1450, "ml": "100ML", "concentracion": "EDP", "foto": "boss_bottled_infinite"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED INFINITE 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1700, "ml": "200ML", "concentracion": "EDP", "foto": "boss_bottled_infinite"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED NIGHT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 1200, "ml": "100ML", "concentracion": "EDT", "foto": "boss_bottled_night"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED NIGHT 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 1600, "ml": "200ML", "concentracion": "EDT", "foto": "boss_bottled_night"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED PARFUM PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1500, "ml": "100ML", "concentracion": "PARFUM", "foto": "boss_bottled"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED TONIC 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 1400, "ml": "100ML", "concentracion": "EDT", "foto": "boss_bottled_tonic"}, {"marca": "HUGO BOSS", "nombre": "BOSS BOTTLED UNLIMITED 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1400, "ml": "100ML", "concentracion": "EDT", "foto": "boss_bottled_unlimited"}, {"marca": "HUGO BOSS", "nombre": "BOSS IN MOTION EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "100ML", "concentracion": "EDT", "foto": "boss_in_motion"}, {"marca": "HUGO BOSS", "nombre": "BOSS SELECTION EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "100ML", "concentracion": "EDT", "foto": "boss_selection"}, {"marca": "HUGO BOSS", "nombre": "BOSS THE SCENT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1500, "ml": "100ML", "concentracion": "EDT", "foto": "boss_the_scent"}, {"marca": "HUGO BOSS", "nombre": "HUGO JEANS EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1200, "ml": "125ML", "concentracion": "EDT", "foto": "hugo_jeans"}, {"marca": "HUGO BOSS", "nombre": "HUGO VERDE 125 ML EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1150, "ml": "125ML", "concentracion": "EDT", "foto": "hugo_verde"}, {"marca": "HUGO BOSS", "nombre": "HUGO VERDE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1550, "ml": "200ML", "concentracion": "EDT", "foto": "hugo_verde"}, {"marca": "HUGO BOSS", "nombre": "HUGO XY EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1000, "ml": "100ML", "concentracion": "EDT", "foto": "hugo_xy"}, {"marca": "ISSEY MIYAKE", "nombre": "L'EAU D'ISSEY MIYAKE 125 ML EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1250, "ml": "125ML", "concentracion": "EDT", "foto": "leau_dissey_miyake"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "JPG LE BEAU EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Verano", "precio": 2050, "ml": "125ML", "concentracion": "EDT", "foto": "jpg_le_beau"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "JPG LE BEAU LE PARFUM EDP DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2850, "ml": "125ML", "concentracion": "PARFUM", "foto": "jpg_le_beau_le"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "JPG LE BEAU PARADISE GARDEN EDP DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Verano", "precio": 2350, "ml": "125ML", "concentracion": "EDP", "foto": "jpg_le_beau_paradise_garden"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "JPG LE MALE ELIXIR PARFUM DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2450, "ml": "125ML", "concentracion": "PARFUM", "foto": "jpg_le_male_elixir"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "JPG LE MALE LE PARFUM 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3400, "ml": "200ML", "concentracion": "PARFUM", "foto": "jpg_le_male_le"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "JPG ULTRA MALE EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2150, "ml": "125ML", "concentracion": "EDT", "foto": "jpg_ultra_male"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "SCANDAL POUR HOMME 150ML EDT EDT DE 150 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2450, "ml": "150ML", "concentracion": "EDT", "foto": "scandal_pour_homme"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "SCANDAL POUR HOMME ABSOLU EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "scandal_pour_homme_absolu"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "SCANDAL POUR HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2150, "ml": "100ML", "concentracion": "EDT", "foto": "scandal_pour_homme"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "SCANDAL POUR HOMME INTENSE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "scandal_pour_homme_intense"}, {"marca": "JEAN PAUL GAULTIER", "nombre": "SCANDAL POUR HOMME LE PARFUM EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2350, "ml": "100ML", "concentracion": "PARFUM", "foto": "scandal_pour_homme_le"}, {"marca": "JESUS DEL POZO", "nombre": "HALLOWEEN MAN EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1050, "ml": "125ML", "concentracion": "EDT", "foto": "halloween_man"}, {"marca": "JESUS DEL POZO", "nombre": "HALLOWEEN MAN MYSTERY EDP DE 125 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1050, "ml": "125ML", "concentracion": "EDP", "foto": "halloween_man_mystery"}, {"marca": "JESUS DEL POZO", "nombre": "HALLOWEEN MAN ROCK ON EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1050, "ml": "100ML", "concentracion": "EDT", "foto": "halloween_man_rock_on"}, {"marca": "JESUS DEL POZO", "nombre": "HALLOWEEN MAN X EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1050, "ml": "125ML", "concentracion": "EDT", "foto": "halloween_man_x"}, {"marca": "KENZO", "nombre": "AQUA KENZO POUR HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1100, "ml": "100ML", "concentracion": "EDT", "foto": "aqua_kenzo_pour_homme"}, {"marca": "KENZO", "nombre": "KENZO HOMME MARINE EDT DE 110 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1200, "ml": "110ML", "concentracion": "EDT", "foto": "kenzo_homme_marine"}, {"marca": "LACOSTE", "nombre": "LACOSTE BLANC EAU FRAICHE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1500, "ml": "100ML", "concentracion": "EDT", "foto": "lacoste_blanc_eau_fraiche"}, {"marca": "LACOSTE", "nombre": "LACOSTE ESSENTIAL EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1100, "ml": "125ML", "concentracion": "EDT", "foto": "lacoste_essential"}, {"marca": "LACOSTE", "nombre": "LACOSTE L.12.12 BLANC 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1550, "ml": "100ML", "concentracion": "EDT", "foto": "lacoste_l1212_blanc"}, {"marca": "LACOSTE", "nombre": "LACOSTE L.12.12 BLANC 175 ML EDT DE 175 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1750, "ml": "175ML", "concentracion": "EDT", "foto": "lacoste_l1212_blanc"}, {"marca": "LACOSTE", "nombre": "LACOSTE L.12.12 BLANC EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1750, "ml": "100ML", "concentracion": "EDP", "foto": "lacoste_l1212_blanc"}, {"marca": "LACOSTE", "nombre": "LACOSTE L'HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Diario", "precio": 1050, "ml": "100ML", "concentracion": "EDT", "foto": "lacoste_lhomme"}, {"marca": "LACOSTE", "nombre": "LACOSTE RED EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1350, "ml": "125ML", "concentracion": "EDT", "foto": "lacoste_red"}, {"marca": "LALIQUE", "nombre": "LALIQUE ENCRE NOIRE A L'EXTREME EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 950, "ml": "100ML", "concentracion": "EDP", "foto": "lalique_encre_noire_a_lextreme"}, {"marca": "LANVIN", "nombre": "E'CLAT D' ARPEGE HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1750, "ml": "100ML", "concentracion": "EDT", "foto": "eclat_d_arpege_homme"}, {"marca": "LOEWE", "nombre": "LOEWE 7 COBALT 150 ML EDP DE 150 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Diario", "precio": 3100, "ml": "150ML", "concentracion": "EDP", "foto": "loewe_7_cobalt"}, {"marca": "LOEWE", "nombre": "SOLO LOEWE CEDRO EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 2200, "ml": "100ML", "concentracion": "EDT", "foto": "solo_loewe_cedro"}, {"marca": "LOLITA LEMPICKA", "nombre": "LOLITA LEMPICKA EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 1100, "ml": "100ML", "concentracion": "EDT", "foto": "lolita_lempicka"}, {"marca": "MANCERA", "nombre": "MANCERA AOUD LEMON MINT EDP DE 120 ML", "tipo": "Lujo", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2250, "ml": "120ML", "concentracion": "EDP", "foto": "mancera_aoud_lemon_mint"}, {"marca": "MANCERA", "nombre": "MANCERA CEDRAT BOISE EDP DE 120 ML", "tipo": "Lujo", "aroma": "Frutal", "ocasion": "Diario", "precio": 2250, "ml": "120ML", "concentracion": "EDP", "foto": "mancera_cedrat_boise"}, {"marca": "MANCERA", "nombre": "MANCERA CEDRAT BOISE INTENSE EDP DE 120 ML", "tipo": "Lujo", "aroma": "Frutal", "ocasion": "Diario", "precio": 2400, "ml": "120ML", "concentracion": "EDP", "foto": "mancera_cedrat_boise_intense"}, {"marca": "MANCERA", "nombre": "MANCERA INSTANT CRUSH EDP DE 120 ML", "tipo": "Lujo", "aroma": "Dulce", "ocasion": "Noche", "precio": 2250, "ml": "120ML", "concentracion": "EDP", "foto": "mancera_instant_crush"}, {"marca": "MANCERA", "nombre": "MANCERA RED TOBACCO EDP DE 120 ML", "tipo": "Lujo", "aroma": "Especiado", "ocasion": "Invierno", "precio": 2300, "ml": "120ML", "concentracion": "EDP", "foto": "mancera_red_tobacco"}, {"marca": "MANCERA", "nombre": "MANCERA TONKA COLA EDP DE 120 ML", "tipo": "Lujo", "aroma": "Dulce", "ocasion": "Invierno", "precio": 2300, "ml": "120ML", "concentracion": "EDP", "foto": "mancera_tonka_cola"}, {"marca": "MESSI FRAGRANCES", "nombre": "MESSI EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1550, "ml": "100ML", "concentracion": "EDP", "foto": "messi"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC COLLECTION EXTREME LEATHER EDP DE 125 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 2050, "ml": "125ML", "concentracion": "EDP", "foto": "mont_blanc_collection_extreme_leather"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC COLLECTION PATCHOULI INK EDP DE 125 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 2050, "ml": "125ML", "concentracion": "EDP", "foto": "mont_blanc_collection_patchouli_ink"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC COLLECTION VETIVER GLACIER EDP DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2050, "ml": "125ML", "concentracion": "EDP", "foto": "mont_blanc_collection_vetiver_glacier"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC EMBLEM EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 1100, "ml": "100ML", "concentracion": "EDT", "foto": "mont_blanc_emblem"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC EXPLORER EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 1400, "ml": "100ML", "concentracion": "EDP", "foto": "mont_blanc_explorer"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC EXPLORER ULTRA BLUE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1400, "ml": "100ML", "concentracion": "EDP", "foto": "mont_blanc_explorer_ultra_blue"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC LEGEND BLUE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1450, "ml": "100ML", "concentracion": "EDP", "foto": "mont_blanc_legend_blue"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC LEGEND EDT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1200, "ml": "100ML", "concentracion": "EDT", "foto": "mont_blanc_legend"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC LEGEND EDT 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1600, "ml": "200ML", "concentracion": "EDT", "foto": "mont_blanc_legend"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC LEGEND SPIRIT 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1250, "ml": "100ML", "concentracion": "EDT", "foto": "mont_blanc_legend_spirit"}, {"marca": "MONT BLANC", "nombre": "MONT BLANC LEGEND SPIRIT 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1600, "ml": "200ML", "concentracion": "EDT", "foto": "mont_blanc_legend_spirit"}, {"marca": "MOSCHINO", "nombre": "MOSCHINO TOY BOY EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Floral", "ocasion": "Noche", "precio": 1600, "ml": "100ML", "concentracion": "EDP", "foto": "moschino_toy_boy"}, {"marca": "NAUTICA", "nombre": "NAUTICA BLUE 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_blue"}, {"marca": "NAUTICA", "nombre": "NAUTICA BLUE SAIL EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_blue_sail"}, {"marca": "NAUTICA", "nombre": "NAUTICA CLASSIC EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_classic"}, {"marca": "NAUTICA", "nombre": "NAUTICA VOYAGE 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 500, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_voyage"}, {"marca": "NAUTICA", "nombre": "NAUTICA VOYAGE 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 800, "ml": "200ML", "concentracion": "EDT", "foto": "nautica_voyage"}, {"marca": "NAUTICA", "nombre": "NAUTICA VOYAGE HERITAGE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_voyage_heritage"}, {"marca": "NAUTICA", "nombre": "NAUTICA VOYAGE N-83 EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_voyage_n83"}, {"marca": "NAUTICA", "nombre": "NAUTICA VOYAGE SPORT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "nautica_voyage_sport"}, {"marca": "OSCAR DE LA RENTA", "nombre": "OSCAR POUR LUI EDT DE 90 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 750, "ml": "90ML", "concentracion": "EDT", "foto": "oscar_pour_lui"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2050, "ml": "100ML", "concentracion": "EDT", "foto": "1_million"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2700, "ml": "200ML", "concentracion": "EDT", "foto": "1_million"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION ELIXIR 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3150, "ml": "200ML", "concentracion": "EDP", "foto": "1_million_elixir"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION GOLD 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2350, "ml": "100ML", "concentracion": "EDP", "foto": "1_million_gold"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION GOLD 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3100, "ml": "200ML", "concentracion": "EDP", "foto": "1_million_gold"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION GOLD ELIXIR 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "1_million_gold_elixir"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION GOLD ELIXIR 200ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3200, "ml": "200ML", "concentracion": "EDP", "foto": "1_million_gold_elixir"}, {"marca": "PACO RABANNE", "nombre": "1 MILLION ROYAL 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2200, "ml": "100ML", "concentracion": "EDP", "foto": "1_million_royal"}, {"marca": "PACO RABANNE", "nombre": "BLACK XS EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1900, "ml": "100ML", "concentracion": "EDT", "foto": "black_xs"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2000, "ml": "100ML", "concentracion": "EDT", "foto": "invictus"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2650, "ml": "200ML", "concentracion": "EDT", "foto": "invictus"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS AQUA EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 2250, "ml": "100ML", "concentracion": "EDT", "foto": "invictus_aqua"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS PARFUM 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2250, "ml": "100ML", "concentracion": "PARFUM", "foto": "invictus"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS VICTORY 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2950, "ml": "200ML", "concentracion": "EDP", "foto": "invictus_victory"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS VICTORY ABSOLU 100ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "invictus_victory_absolu"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS VICTORY ABSOLU 200ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3200, "ml": "200ML", "concentracion": "EDP", "foto": "invictus_victory_absolu"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS VICTORY ELIXIR 100 ML EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2400, "ml": "100ML", "concentracion": "EDP", "foto": "invictus_victory_elixir"}, {"marca": "PACO RABANNE", "nombre": "INVICTUS VICTORY ELIXIR 200 ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3150, "ml": "200ML", "concentracion": "EDP", "foto": "invictus_victory_elixir"}, {"marca": "PACO RABANNE", "nombre": "PACOLLECTION DANDY ME EDP DE 62 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1650, "ml": "62ML", "concentracion": "EDP", "foto": "pacollection_dandy_me"}, {"marca": "PACO RABANNE", "nombre": "PHANTOM EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 2000, "ml": "100ML", "concentracion": "EDT", "foto": "phantom"}, {"marca": "PACO RABANNE", "nombre": "PHANTOM ELIXIR EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2250, "ml": "100ML", "concentracion": "EDP", "foto": "phantom_elixir"}, {"marca": "PACO RABANNE", "nombre": "PHANTOM INTENSE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2200, "ml": "100ML", "concentracion": "EDP", "foto": "phantom_intense"}, {"marca": "PACO RABANNE", "nombre": "PHANTOM PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2250, "ml": "100ML", "concentracion": "PARFUM", "foto": "phantom"}, {"marca": "PARIS HILTON", "nombre": "PARIS HILTON MEN EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "paris_hilton_men"}, {"marca": "PERRY ELLIS", "nombre": "360º 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "360"}, {"marca": "PERRY ELLIS", "nombre": "360º 200 ML EDT DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "200ML", "concentracion": "EDT", "foto": "360"}, {"marca": "PERRY ELLIS", "nombre": "360º RED 100 ML EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Diario", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "360_red"}, {"marca": "PERRY ELLIS", "nombre": "PERRY 18 FUEGO EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Diario", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "perry_18_fuego"}, {"marca": "PERRY ELLIS", "nombre": "PERRY ELLIS PLATINUM EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 550, "ml": "100ML", "concentracion": "EDT", "foto": "perry_ellis_platinum"}, {"marca": "PRADA", "nombre": "PRADA LUNA ROSSA OCEAN LE PARFUM EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 2550, "ml": "100ML", "concentracion": "PARFUM", "foto": "prada_luna_rossa_ocean_le"}, {"marca": "PUIG", "nombre": "QUORUM EDT NAVAJA/KIT MANICURE", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 600, "ml": "", "concentracion": "EDT", "foto": "quorum"}, {"marca": "PUIG", "nombre": "AGUA BRAVA 200 ML EDC DE 200 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 750, "ml": "200ML", "concentracion": "EDC", "foto": "agua_brava"}, {"marca": "PUIG", "nombre": "QUORUM EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 600, "ml": "100ML", "concentracion": "EDT", "foto": "quorum"}, {"marca": "RALPH LAUREN", "nombre": "BIG PONY BLUE 1 EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "big_pony_blue_1"}, {"marca": "RALPH LAUREN", "nombre": "POLO 67 EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Verano", "precio": 1750, "ml": "125ML", "concentracion": "EDT", "foto": "polo_67"}, {"marca": "RALPH LAUREN", "nombre": "POLO BLACK 125 ML EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Noche", "precio": 1250, "ml": "125ML", "concentracion": "EDT", "foto": "polo_black"}, {"marca": "RALPH LAUREN", "nombre": "POLO SPORT EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1150, "ml": "125ML", "concentracion": "EDT", "foto": "polo_sport"}, {"marca": "RALPH LAUREN", "nombre": "SAFARI FOR MEN EDT DE 125 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Invierno", "precio": 1600, "ml": "125ML", "concentracion": "EDT", "foto": "safari_for_men"}, {"marca": "SALVATORE FERRAGAMO", "nombre": "ACQUA ESSENZIALE BLU EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1000, "ml": "100ML", "concentracion": "EDT", "foto": "acqua_essenziale_blu"}, {"marca": "SALVATORE FERRAGAMO", "nombre": "ACQUA ESSENZIALE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1000, "ml": "100ML", "concentracion": "EDT", "foto": "acqua_essenziale"}, {"marca": "SALVATORE FERRAGAMO", "nombre": "F BY FERRAGAMO FREE TIME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "f_by_ferragamo_free_time"}, {"marca": "SALVATORE FERRAGAMO", "nombre": "FERRAGAMO INTENSE LEATHER EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 1150, "ml": "100ML", "concentracion": "EDP", "foto": "ferragamo_intense_leather"}, {"marca": "SALVATORE FERRAGAMO", "nombre": "FERRAGAMO RED LEATHER EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 1150, "ml": "100ML", "concentracion": "EDP", "foto": "ferragamo_red_leather"}, {"marca": "SALVATORE FERRAGAMO", "nombre": "UOMO FERRAGAMO EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Invierno", "precio": 1050, "ml": "100ML", "concentracion": "EDT", "foto": "uomo_ferragamo"}, {"marca": "SALVATORE FERRRAGAMO", "nombre": "FERRAGAMO SPICY LEATHER PARFUM DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 1150, "ml": "100ML", "concentracion": "PARFUM", "foto": "ferragamo_spicy_leather"}, {"marca": "SHAKIRA", "nombre": "SHAKIRA WE ROCK EDT DE 80 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 450, "ml": "80ML", "concentracion": "EDT", "foto": "shakira_we_rock"}, {"marca": "TOM FORD", "nombre": "TOM FORD EAU D'OMBRE LEATHER EDT DE 100 ML", "tipo": "Lujo", "aroma": "Amaderado", "ocasion": "Noche", "precio": 2750, "ml": "100ML", "concentracion": "EDT", "foto": "tom_ford_eau_dombre_leather"}, {"marca": "TOM FORD", "nombre": "TOM FORD GREY VETIVER EDP DE 100 ML", "tipo": "Lujo", "aroma": "Fresco", "ocasion": "Diario", "precio": 3900, "ml": "100ML", "concentracion": "EDP", "foto": "tom_ford_grey_vetiver"}, {"marca": "TOM FORD", "nombre": "TOM FORD NOIR EXTREME EDP EDP DE 100 ML", "tipo": "Lujo", "aroma": "Dulce", "ocasion": "Noche", "precio": 3250, "ml": "100ML", "concentracion": "EDP", "foto": "tom_ford_noir_extreme"}, {"marca": "TOMMY HILFIGER", "nombre": "TOMMY EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 900, "ml": "100ML", "concentracion": "EDT", "foto": "tommy"}, {"marca": "TOMMY HILFIGER", "nombre": "TOMMY FOREVER EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1000, "ml": "100ML", "concentracion": "EDT", "foto": "tommy_forever"}, {"marca": "TOMMY HILFIGER", "nombre": "TOMMY IMPACT EDT DE 104 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Diario", "precio": 1300, "ml": "104ML", "concentracion": "EDT", "foto": "tommy_impact"}, {"marca": "TOMMY HILFIGER", "nombre": "TOMMY IMPACT INTENSE EDP DE 104 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 1300, "ml": "104ML", "concentracion": "EDP", "foto": "tommy_impact_intense"}, {"marca": "TOMMY HILFIGER", "nombre": "TOMMY IMPACT SPARK EDT DE 104 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Verano", "precio": 1300, "ml": "104ML", "concentracion": "EDT", "foto": "tommy_impact_spark"}, {"marca": "TOMMY HILFIGER", "nombre": "TOMMY IMPACT TOGETHER EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1300, "ml": "100ML", "concentracion": "EDT", "foto": "tommy_impact_together"}, {"marca": "TOUS", "nombre": "TOUS MAN CHILL EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1000, "ml": "100ML", "concentracion": "EDT", "foto": "tous_man_chill"}, {"marca": "TOUS", "nombre": "TOUS MAN SPORT EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 950, "ml": "100ML", "concentracion": "EDT", "foto": "tous_man_sport"}, {"marca": "UNGARO", "nombre": "UNGARO III EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 800, "ml": "100ML", "concentracion": "EDT", "foto": "ungaro_iii"}, {"marca": "VALENTINO", "nombre": "VALENTINO UOMO BORN IN ROMA CORAL FANTASY EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Frutal", "ocasion": "Noche", "precio": 2850, "ml": "100ML", "concentracion": "EDT", "foto": "valentino_uomo_born_in_roma_coral_fantas"}, {"marca": "VALENTINO", "nombre": "VALENTINO UOMO BORN IN ROMA EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2750, "ml": "100ML", "concentracion": "EDT", "foto": "valentino_uomo_born_in_roma"}, {"marca": "VALENTINO", "nombre": "VALENTINO UOMO BORN IN ROMA INTENSE EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 3600, "ml": "100ML", "concentracion": "EDP", "foto": "valentino_uomo_born_in_roma_intense"}, {"marca": "VALENTINO", "nombre": "VALENTINO UOMO EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2250, "ml": "100ML", "concentracion": "EDT", "foto": "valentino_uomo"}, {"marca": "VERSACE", "nombre": "BLUE JEANS EDT DE 75 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Diario", "precio": 750, "ml": "75ML", "concentracion": "EDT", "foto": "blue_jeans"}, {"marca": "VERSACE", "nombre": "VERSACE DYLAN BLUE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 1550, "ml": "100ML", "concentracion": "EDT", "foto": "versace_dylan_blue"}, {"marca": "VERSACE", "nombre": "VERSACE EROS EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1850, "ml": "100ML", "concentracion": "EDP", "foto": "versace_eros"}, {"marca": "VERSACE", "nombre": "VERSACE EROS EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 1600, "ml": "100ML", "concentracion": "EDT", "foto": "versace_eros"}, {"marca": "VERSACE", "nombre": "VERSACE EROS ENERGY EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Verano", "precio": 2050, "ml": "100ML", "concentracion": "EDP", "foto": "versace_eros_energy"}, {"marca": "VERSACE", "nombre": "VERSACE EROS FLAME EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Cítrico", "ocasion": "Noche", "precio": 1750, "ml": "100ML", "concentracion": "EDP", "foto": "versace_eros_flame"}, {"marca": "VERSACE", "nombre": "VERSACE EROS PARFUM 200ML EDP DE 200 ML", "tipo": "Diseñador", "aroma": "Dulce", "ocasion": "Noche", "precio": 2600, "ml": "200ML", "concentracion": "PARFUM", "foto": "versace_eros"}, {"marca": "VERSACE", "nombre": "VERSACE MAN EAU FRAICHE EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1500, "ml": "100ML", "concentracion": "EDT", "foto": "versace_man_eau_fraiche"}, {"marca": "VERSACE", "nombre": "VERSACE POUR HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Verano", "precio": 1400, "ml": "100ML", "concentracion": "EDT", "foto": "versace_pour_homme"}, {"marca": "VIKTOR & ROLF", "nombre": "SPICEBOMB DARK LEATHER 150 ML EDP DE 150 ML", "tipo": "Diseñador", "aroma": "Amaderado", "ocasion": "Noche", "precio": 3100, "ml": "150ML", "concentracion": "EDP", "foto": "spicebomb_dark_leather"}, {"marca": "VIKTOR & ROLF", "nombre": "SPICEBOMB EDT DE 90 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Invierno", "precio": 2500, "ml": "90ML", "concentracion": "EDT", "foto": "spicebomb"}, {"marca": "VIKTOR & ROLF", "nombre": "SPICEBOMB INFRARED EDP EDP DE 90 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 2600, "ml": "90ML", "concentracion": "EDP", "foto": "spicebomb_infrared"}, {"marca": "XERJOFF", "nombre": "XERJOFF ERBA PURA EDP DE 100 ML", "tipo": "Lujo", "aroma": "Frutal", "ocasion": "Diario", "precio": 4750, "ml": "100ML", "concentracion": "EDP", "foto": "xerjoff_erba_pura"}, {"marca": "YVES SAINT LAURENT", "nombre": "LA NUIT DE L'HOMME EDT DE 100 ML", "tipo": "Diseñador", "aroma": "Especiado", "ocasion": "Noche", "precio": 2200, "ml": "100ML", "concentracion": "EDT", "foto": "la_nuit_de_lhomme"}, {"marca": "YVES SAINT LAURENT", "nombre": "MYSLF EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 2850, "ml": "100ML", "concentracion": "EDP", "foto": "myslf"}, {"marca": "YVES SAINT LAURENT", "nombre": "Y EDP EDP DE 100 ML", "tipo": "Diseñador", "aroma": "Fresco", "ocasion": "Diario", "precio": 2850, "ml": "100ML", "concentracion": "EDP", "foto": "y"}];
+
+const ACCORDS = {
+  // By aroma type defaults
+  'Fresco':     [['Fresco',90],['Amaderado',55],['Aromático',45],['Cítrico',35],['Marino',30]],
+  'Cítrico':    [['Cítrico',92],['Fresco',70],['Aromático',40],['Verde',35],['Afrutado',25]],
+  'Dulce':      [['Dulce',88],['Vainilla',75],['Amaderado',55],['Ámbar',45],['Especiado',35]],
+  'Amaderado':  [['Amaderado',90],['Especiado',60],['Ámbar',50],['Dulce',40],['Fresco',30]],
+  'Frutal':     [['Afrutado',85],['Fresco',65],['Floral',45],['Dulce',40],['Cítrico',30]],
+  'Floral':     [['Floral',90],['Fresco',60],['Dulce',45],['Afrutado',35],['Almizclado',30]],
+  'Especiado':  [['Especiado',88],['Amaderado',70],['Ámbar',55],['Dulce',40],['Cuero',30]],
+};
+
+// Special overrides for famous perfumes
+const ACCORDS_SPECIAL = {
+  'sauvage':          [['Fresco especiado',95],['Aromático',80],['Amaderado',65],['Ámbar',45],['Fresco',40]],
+  'sauvage_edp':      [['Lavanda',90],['Fresco especiado',75],['Amaderado',65],['Vainilla',50],['Ámbar',40]],
+  'acqua_di_gio':     [['Marino',95],['Cítrico',85],['Fresco',75],['Amaderado',45],['Aromático',35]],
+  'invictus':         [['Marino',90],['Fresco',80],['Amaderado',55],['Afrutado',45],['Aromático',35]],
+  'jpg_le_beau':      [['Coco',92],['Cítrico',78],['Dulce',65],['Fresco',55],['Amaderado',40]],
+  'versace_eros':     [['Dulce',88],['Fresco',72],['Amaderado',60],['Menta',55],['Vainilla',45]],
+  'scandal_pour_homme':[['Dulce',90],['Miel',78],['Amaderado',60],['Cuero',50],['Aromático',38]],
+  '1_million':        [['Cuero',88],['Dulce',80],['Especiado',65],['Amaderado',55],['Afrutado',40]],
+  'versace_dylan_blue':[['Fresco',90],['Acuático',78],['Aromático',60],['Amaderado',45],['Almizclado',35]],
+  'stronger_with_you': [['Dulce',90],['Vainilla',78],['Especiado',65],['Amaderado',55],['Aromático',40]],
+  'bad_boy':          [['Amaderado',88],['Especiado',75],['Cuero',60],['Ámbar',50],['Dulce',40]],
+  'boss_bottled':     [['Manzana',85],['Amaderado',72],['Especiado',58],['Dulce',45],['Aromático',35]],
+  'legend':           [['Fresco',88],['Aromático',75],['Amaderado',60],['Almizclado',45],['Cítrico',35]],
+};
+
+const ACORDE_COLORS = {
+  'Fresco':['#4A9CC4','#357BA3'],
+  'Fresco especiado':['#5BA89A','#3D7A6E'],
+  'Cítrico':['#E8A020','#C47A10'],
+  'Dulce':['#C45088','#9A3068'],
+  'Amaderado':['#8B6040','#6A4830'],
+  'Afrutado':['#E07040','#B85030'],
+  'Floral':['#C070C0','#9A50A0'],
+  'Especiado':['#C06020','#9A4010'],
+  'Aromático':['#60A860','#408840'],
+  'Marino':['#3080C0','#1860A0'],
+  'Acuático':['#40A0D0','#2080B0'],
+  'Vainilla':['#D0A040','#A07820'],
+  'Ámbar':['#C08030','#A06010'],
+  'Almizclado':['#9090A0','#707080'],
+  'Cuero':['#8B4513','#6B2500'],
+  'Lavanda':['#9070C0','#7050A0'],
+  'Verde':['#60A030','#408010'],
+  'Menta':['#40B080','#208060'],
+  'Miel':['#D0A020','#A07800'],
+  'Coco':['#D0A870','#A07840'],
+};
+
+function getAccords(p) {
+  if(ACCORDS_SPECIAL[p.foto]) return ACCORDS_SPECIAL[p.foto];
+  return ACCORDS[p.aroma] || ACCORDS['Fresco'];
+}
+
+function renderAccords(p) {
+  const acordes = getAccords(p);
+  const max = acordes[0][1];
+  return `<div class="modal-acordes">
+    <div class="modal-acordes-title">Acordes principales</div>
+    ${acordes.map(([nombre, val]) => {
+      const pct = Math.round((val/100)*100);
+      const colors = ACORDE_COLORS[nombre] || ['#888','#666'];
+      return `<div class="acorde-row">
+        <div class="acorde-label">${nombre}</div>
+        <div class="acorde-bar-wrap">
+          <div class="acorde-bar" style="width:${pct}%;background:linear-gradient(90deg,${colors[0]},${colors[1]})">
+            <span>${val}%</span>
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+}
+
+const FEATURED=[90, 110, 228, 162, 284, 170, 219, 282, 118, 57];
+const AROMA_CLASS={"Fresco": "fresco", "Cítrico": "citrico", "Dulce": "dulce", "Amaderado": "amaderado", "Frutal": "frutal", "Floral": "floral", "Especiado": "especiado"};
+
+function fmt(n){return '$'+n.toLocaleString('es-MX')}
+function initials(m){const w=m.split(/\s+/);return w.length>1?(w[0][0]+w[1][0]).toUpperCase():m.substring(0,2).toUpperCase()}
+function cleanName(n){return n.replace(/\s*\d+\s*ML\b.*$/i,'').replace(/\s*(EDT|EDP|EDC|PARFUM)\b.*/i,'').trim()}
+
+let activeFilter='all', query='';
+
+function aromaTag(a){const cls=AROMA_CLASS[a]||'fresco';return `<span class="tag tag-${cls}">${a}</span>`}
+function tipoTag(t){if(t==='Árabe')return`<span class="tag tag-arabe">Árabe</span>`;if(t==='Lujo')return`<span class="tag tag-lujo">✦ Lujo</span>`;return''}
+
+function render(){
+  const q=query.toLowerCase();
+  const filtered=DATA.filter((p,i)=>{
+    const mq=!q||p.marca.toLowerCase().includes(q)||p.nombre.toLowerCase().includes(q)||p.aroma.toLowerCase().includes(q);
+    const mf=activeFilter==='all'
+      ||(activeFilter==='diario'&&p.ocasion==='Diario')
+      ||(activeFilter==='verano'&&p.ocasion==='Verano')
+      ||(activeFilter==='arabe'&&p.tipo==='Árabe')
+      ||(activeFilter==='lujo'&&p.tipo==='Lujo')
+      ||(activeFilter==='lt1000'&&p.precio<1000)
+      ||(activeFilter==='1k2k'&&p.precio>=1000&&p.precio<2000)
+      ||(activeFilter==='gt2000'&&p.precio>=2000)
+      ||(activeFilter==='noche'&&p.ocasion==='Noche')
+      ||(activeFilter==='invierno'&&p.ocasion==='Invierno');
+    return mq&&mf;
+  });
+  document.getElementById('cnt').textContent=filtered.length;
+  const grid=document.getElementById('grid');
+  const empty=document.getElementById('empty');
+  if(!filtered.length){grid.innerHTML='';empty.style.display='block';return}
+  empty.style.display='none';
+  grid.innerHTML=filtered.map((p)=>{
+    const idx=DATA.indexOf(p);
+    const badge=p.ml||p.concentracion?`<div class="card-ml">${[p.concentracion,p.ml].filter(Boolean).join(' · ')}</div>`:'';
+    return `<div class="card" style="animation-delay:0s" onclick="openModal(${idx})">
+      <div class="card-img">
+        <div class="card-img-placeholder">
+          <div class="card-img-initials">${initials(p.marca)}</div>
+          <div class="card-img-sub">${p.concentracion||'SET'}</div>
+        </div>
+        ${p.foto?`<img src="fotos/${p.foto}.jpg" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'">`:''}
+      </div>
+      <div class="card-body">
+        <div class="card-marca">${p.marca}</div>
+        <div class="card-nombre">${cleanName(p.nombre)}</div>
+        <div class="card-tags">${aromaTag(p.aroma)}${tipoTag(p.tipo)}</div>
+        <div class="card-footer">
+          <div><div class="card-price">${fmt(p.precio)}</div><div class="card-price-sub">MXN</div></div>
+          ${badge}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderFeatured(){
+  const scroll=document.getElementById('featured-scroll');
+  if(!scroll)return;
+  scroll.innerHTML=FEATURED.map(i=>{
+    const p=DATA[i];
+    const init=initials(p.marca);
+    return `<div class="feat-card" onclick="openModal(${i})">
+      <div class="feat-img">
+        <div class="feat-initials">${init}</div>
+        ${p.foto?`<img src="fotos/${p.foto}.jpg" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'">`:''}
+      </div>
+      <div class="feat-body">
+        <div class="feat-marca">${p.marca}</div>
+        <div class="feat-nombre">${cleanName(p.nombre)}</div>
+        <div class="feat-price">${fmt(p.precio)}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModal(idx){
+  const p=DATA[idx];
+  const imgTag=document.getElementById('m-img-tag');
+  imgTag.src=`fotos/${p.foto}.jpg`;
+  imgTag.alt=p.marca;
+  imgTag.onerror=()=>{document.getElementById('m-img').style.display='none'};
+  document.getElementById('m-img').style.display='flex';
+  document.getElementById('m-marca').textContent=p.marca;
+  document.getElementById('m-nombre').textContent=cleanName(p.nombre);
+  document.getElementById('m-version').textContent=[[p.concentracion,p.ml].filter(Boolean).join(' · '),p.ocasion].filter(Boolean).join('  ·  ');
+  document.getElementById('m-tags').innerHTML=aromaTag(p.aroma)+tipoTag(p.tipo);
+  document.getElementById('m-price').textContent=fmt(p.precio);
+  const msg=encodeURIComponent(`Hola, vi el catálogo de Sillage y me interesa: ${cleanName(p.nombre)} (${p.marca}) — ${fmt(p.precio)} MXN`);
+  document.getElementById('m-wa').href=`https://wa.me/524777224550?text=${msg}`;
+  document.getElementById('m-acordes').innerHTML=renderAccords(p);
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal(e){
+  if(e.target===document.getElementById('modal'))
+    document.getElementById('modal').classList.remove('open');
+}
+
+document.getElementById('search').addEventListener('input',e=>{query=e.target.value;render()});
+document.querySelectorAll('.chip').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter=btn.dataset.f;
+    render();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+  render();
+  renderFeatured();
+});
+</script>
+</body>
+</html>
