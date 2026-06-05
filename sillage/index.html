@@ -342,6 +342,17 @@ main{padding:0 12px 80px;max-width:1400px;margin:0 auto}
 }
 .feat-price{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--text)}
 
+
+/* ── ACORDES ── */
+.modal-acordes-title{
+  font-size:10px;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:10px;margin-top:4px;
+}
+.accord-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.accord-label{font-size:12px;color:var(--text);width:88px;flex-shrink:0;text-align:right}
+.accord-bar-bg{flex:1;height:8px;background:var(--gray);border-radius:4px;overflow:hidden}
+.accord-bar-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.accord-pct{font-size:11px;color:var(--muted);width:32px;text-align:right;flex-shrink:0}
 </style>
 </head>
 <body>
@@ -414,6 +425,7 @@ main{padding:0 12px 80px;max-width:1400px;margin:0 auto}
     <div class="modal-nombre" id="m-nombre"></div>
     <div class="modal-version" id="m-version"></div>
     <div class="modal-tags" id="m-tags"></div>
+    <div id="m-acordes" style="margin-bottom:16px"></div>
     <div class="modal-price" id="m-price"></div>
     <div class="modal-price-note">Precio final MXN · Entrega en León, Gto.</div>
     <a class="modal-wa" id="m-wa" href="#" target="_blank">
@@ -515,6 +527,43 @@ function openModal(idx){
   document.getElementById('m-nombre').textContent=cleanName(p.nombre);
   document.getElementById('m-version').textContent=[[p.concentracion,p.ml].filter(Boolean).join(' · '),p.ocasion].filter(Boolean).join('  ·  ');
   document.getElementById('m-tags').innerHTML=aromaTag(p.aroma)+tipoTag(p.tipo);
+  // Acordes
+  const acordesEl=document.getElementById('m-acordes');
+  const accords=ACCORDS_SPECIAL[p.foto];
+  if(accords&&accords.length){
+    const colors=['#D45B8A','#C4A020','#7A5C2E','#5A3A1A','#2E7D4F'];
+    acordesEl.innerHTML='<div class="modal-acordes-title">Acordes principales</div>'+
+      accords.map(([label,pct],i)=>
+        `<div class="accord-row">
+          <div class="accord-label">${label}</div>
+          <div class="accord-bar-bg"><div class="accord-bar-fill" style="width:${pct}%;background:${colors[i%colors.length]}"></div></div>
+          <div class="accord-pct">${pct}%</div>
+        </div>`
+      ).join('');
+    acordesEl.style.display='block';
+  } else {
+    // Genérico basado en aroma
+    const genericMap={
+      'Fresco':[['Fresco',85],['Cítrico',72],['Acuático',58],['Amaderado',45],['Aromático',32]],
+      'Cítrico':[['Cítrico',88],['Fresco',75],['Aromático',60],['Amaderado',45],['Verde',30]],
+      'Dulce':[['Dulce',85],['Vainilla',70],['Amaderado',58],['Especiado',45],['Ámbar',35]],
+      'Amaderado':[['Amaderado',88],['Especiado',70],['Aromático',55],['Ámbar',45],['Cuero',32]],
+      'Especiado':[['Especiado',85],['Amaderado',72],['Aromático',58],['Ámbar',45],['Cuero',32]],
+      'Frutal':[['Afrutado',85],['Fresco',72],['Cítrico',58],['Floral',45],['Amaderado',30]],
+      'Floral':[['Floral',85],['Fresco',72],['Almizclado',58],['Amaderado',45],['Cítrico',30]],
+    };
+    const gen=genericMap[p.aroma]||genericMap['Fresco'];
+    const colors=['#D45B8A','#C4A020','#7A5C2E','#5A3A1A','#2E7D4F'];
+    acordesEl.innerHTML='<div class="modal-acordes-title">Acordes principales</div>'+
+      gen.map(([label,pct],i)=>
+        `<div class="accord-row">
+          <div class="accord-label">${label}</div>
+          <div class="accord-bar-bg"><div class="accord-bar-fill" style="width:${pct}%;background:${colors[i%colors.length]}"></div></div>
+          <div class="accord-pct">${pct}%</div>
+        </div>`
+      ).join('');
+    acordesEl.style.display='block';
+  }
   document.getElementById('m-price').textContent=fmt(p.precio);
   const msg=encodeURIComponent(`Hola, vi el catálogo de Sillage y me interesa: ${cleanName(p.nombre)} (${p.marca}) — ${fmt(p.precio)} MXN`);
   document.getElementById('m-wa').href=`https://wa.me/524777224550?text=${msg}`;
