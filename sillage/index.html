@@ -63,8 +63,8 @@ body{background:var(--white);color:var(--text);font-family:'Outfit',sans-serif;m
 .featured-scroll::-webkit-scrollbar{display:none}
 .feat-card{flex-shrink:0;width:120px;background:var(--gray);border-radius:12px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:transform .15s}
 .feat-card:active{transform:scale(0.96)}
-.feat-img{width:120px;height:100px;background:var(--gray);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.feat-initials{font-family:'Bebas Neue',sans-serif;font-size:24px;color:rgba(0,0,0,0.15)}
+.feat-img{width:120px;height:100px;background:#111;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.feat-initials{font-family:'Bebas Neue',sans-serif;font-size:24px;color:rgba(255,255,255,0.2)}
 .feat-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px;z-index:1;background:var(--gray)}
 .feat-body{padding:8px 8px 10px}
 .feat-marca{font-size:8px;letter-spacing:0.12em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:2px}
@@ -100,7 +100,18 @@ main{padding:0 12px 100px;max-width:1400px;margin:0 auto}
 .card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s}
 .card:active{transform:scale(0.97)}
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.card-img{background:var(--gray);width:100%;height:150px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0}
+.card-img{background:var(--black);width:100%;height:150px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0}
+/* Fondos por aroma */
+.card-img.bg-fresco{background:linear-gradient(145deg,#0d1b2a,#1a2e42)}
+.card-img.bg-citrico{background:linear-gradient(145deg,#1a1500,#2e2500)}
+.card-img.bg-dulce{background:linear-gradient(145deg,#1a0a18,#2e1228)}
+.card-img.bg-amaderado{background:linear-gradient(145deg,#1a1008,#2e1e10)}
+.card-img.bg-frutal{background:linear-gradient(145deg,#0d1a0d,#122212)}
+.card-img.bg-floral{background:linear-gradient(145deg,#1a0818,#2a1025)}
+.card-img.bg-especiado{background:linear-gradient(145deg,#1a0d00,#2e1800)}
+/* Borde dorado en tops y lujo */
+.card.is-top{border:1.5px solid rgba(184,150,46,.5)}
+.card.is-top .card-img::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(184,150,46,.06) 0%,transparent 70%)}
 /* SLIDER en card */
 .card-slides{display:flex;width:200%;height:100%;transition:transform .35s ease}
 .card-slide{width:50%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
@@ -112,8 +123,8 @@ main{padding:0 12px 100px;max-width:1400px;margin:0 auto}
 .card-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.45)}
 .card-dot.on{background:#fff}
 .card-img-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.card-img-initials{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(0,0,0,0.12);letter-spacing:0.05em}
-.card-img-sub{font-size:8px;letter-spacing:0.15em;color:rgba(0,0,0,0.2);text-transform:uppercase}
+.card-img-initials{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(255,255,255,0.15);letter-spacing:0.05em}
+.card-img-sub{font-size:8px;letter-spacing:0.15em;color:rgba(255,255,255,0.2);text-transform:uppercase}
 .card-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px;z-index:1;background:var(--gray)}
 .dupe-badge{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.6);color:#FFD700;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;z-index:6;letter-spacing:.04em}
 .card-body{padding:8px 10px 10px;min-height:0}
@@ -159,9 +170,9 @@ main{padding:0 12px 100px;max-width:1400px;margin:0 auto}
 .modal-close{position:absolute;top:16px;right:16px;background:var(--gray);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
 
 /* MODAL IMAGE SLIDER */
-.modal-img-wrap{width:100%;height:260px;background:#f4f3ef;border-radius:12px;margin-bottom:14px;overflow:hidden;position:relative}
+.modal-img-wrap{width:100%;height:260px;background:#111;border-radius:12px;margin-bottom:14px;overflow:hidden;position:relative}
 .modal-slides{display:flex;height:100%;transition:transform .3s ease}
-.modal-slide{width:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative}
+.modal-slide{width:100%;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;background:inherit}
 .modal-slide img{height:240px;max-width:90%;object-fit:contain}
 .modal-slide-label{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.45);color:#fff;font-size:10px;padding:3px 10px;border-radius:10px;white-space:nowrap;letter-spacing:.06em}
 .modal-nav{position:absolute;top:50%;transform:translateY(-50%);width:30px;height:30px;background:rgba(0,0,0,.35);border:none;border-radius:50%;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}
@@ -419,8 +430,9 @@ function render(){
       imgHtml=`<div class="card-img-placeholder"><div class="card-img-initials">${initials(p.marca)}</div><div class="card-img-sub">${p.concentracion||'SET'}</div></div>
         ${p.foto?`<img src="fotos/${p.foto}.jpg" loading="lazy" onerror="this.style.display='none'">`:'' }`;
     }
-    return`<div class="card" onclick="openModal(${idx})">
-      <div class="card-img">${imgHtml}</div>
+    const aromaClass={'Fresco':'bg-fresco','Cítrico':'bg-citrico','Dulce':'bg-dulce','Amaderado':'bg-amaderado','Frutal':'bg-frutal','Floral':'bg-floral','Especiado':'bg-especiado'};
+    return`<div class="card${p.top||p.tipo==='Lujo'?' is-top':''}" onclick="openModal(${idx})">
+      <div class="card-img ${aromaClass[p.aroma]||'bg-fresco'}">${imgHtml}</div>
       <div class="card-body">
         <div class="card-marca">${p.marca}</div>
         <div class="card-nombre">${cleanName(p.nombre)}</div>
